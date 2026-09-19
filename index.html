@@ -133,6 +133,41 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
 @media(max-width:760px){.hero-menu-trigger{right:2px;top:0}.brandcopy{padding-right:42px;max-width:82%!important}.site-footer{margin-top:10px!important;padding:12px 12px 13px!important}.site-footer blockquote{font-size:.76rem!important;line-height:1.32!important}.footer-signature{font-size:.70rem}.wrap{padding-bottom:16px!important}}
 @media(max-width:430px){.hero-menu-trigger{width:40px;height:40px;border-radius:12px;font-size:1.25rem}.compact-topbar{padding:7px 8px}.compact-title b{font-size:.80rem}.compact-title span{font-size:.68rem}.menu-drawer{width:90vw}}
 
+
+/* V3.4 — Home orientada ao simulado e funções secundárias no menu */
+.home-sim-stack{display:grid;gap:12px;margin-bottom:12px}
+.primary-sim-card{position:relative;overflow:hidden;background:linear-gradient(135deg,#171b22 0%,#242b34 58%,#4b2a13 100%);color:#fff;border-color:rgba(255,255,255,.06);padding:22px}
+.primary-sim-card:after{content:"";position:absolute;right:-55px;top:-80px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,0,.36),rgba(255,107,0,0) 68%);pointer-events:none}
+.primary-sim-card .eyebrow-home,.complete-sim-card .eyebrow-home{font-size:.72rem;letter-spacing:.10em;text-transform:uppercase;font-weight:900;color:#ffb36b;margin-bottom:6px}
+.primary-sim-card h2,.complete-sim-card h2{margin:0 0 6px;font-size:clamp(1.35rem,4vw,1.8rem)}
+.primary-sim-card p{margin:0 0 16px;color:#dbe3ec;max-width:680px}
+.primary-sim-card .primary{position:relative;z-index:2;min-height:52px;font-size:1rem;padding-inline:20px}
+.complete-sim-card{display:flex;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(135deg,#fff 0%,#fff6ed 100%)}
+.complete-sim-card p{margin:0;color:var(--muted)}
+.complete-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.home-progress-card{padding:15px 17px}
+.home-progress-card .section-title{margin-bottom:9px}
+.home-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.home-metric{padding:11px 12px;border:1px solid #eadfd4;border-radius:14px;background:#fffaf5}
+.home-metric b{display:block;font-size:1.24rem;color:#171d26}.home-metric span{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
+.home-review-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px!important}
+.home-review-strip .review-copy{min-width:0}.home-review-strip b{display:block;color:#151b24}.home-review-strip span{font-size:.8rem;color:var(--muted)}
+.home-review-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.home-review-actions a{white-space:nowrap}
+.drawer-section-label{padding:12px 12px 5px;font-size:.68rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:#8a5a32}
+.drawer-year-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;padding:2px 10px 9px}
+.drawer-year-grid button{padding:9px!important;border:1px solid #ead7c7!important;background:#fff8f1!important;justify-content:center!important;text-align:center!important;font-weight:900;color:#6f3c12!important}
+.drawer-divider{height:1px;background:#eee4dc;margin:5px 12px}
+.page-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.page-title-row h2{margin:0}.page-title-row p{margin:3px 0 0;color:var(--muted)}
+.proofs-page .proof-grid{margin-top:8px}.directed-page .directed-box{border-top:0;margin-top:0;padding-top:0}
+.sim-mode-badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:#fff1e4;color:#94500e;font-size:.7rem;font-weight:900;border:1px solid #f1d2b5;margin-top:4px}
+@media(max-width:680px){
+  .primary-sim-card{padding:17px}.primary-sim-card .primary{width:100%}
+  .complete-sim-card{display:block;padding:15px}.complete-actions{margin-top:12px;justify-content:stretch}.complete-actions>*{flex:1;text-align:center}
+  .home-metrics{grid-template-columns:repeat(3,1fr);gap:6px}.home-metric{padding:9px 8px}.home-metric b{font-size:1.06rem}.home-metric span{font-size:.67rem}
+  .home-review-strip{display:block}.home-review-actions{margin-top:10px;justify-content:stretch}.home-review-actions a{flex:1;text-align:center}
+  .drawer-nav button,.drawer-nav a{padding:11px 12px}.drawer-nav small{font-size:.70rem}
+}
+
 </style>
 </head>
 <body>
@@ -171,12 +206,26 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
       <button type="button" class="menu-close" aria-label="Fechar menu" onclick="toggleMainMenu(false)">×</button>
     </div>
     <nav class="drawer-nav">
-      <button type="button" onclick="toggleMainMenu(false);openAbout()"><span>ℹ️</span><div><b>Sobre</b><small>Finalidade e informações do material</small></div></button>
-      <button type="button" onclick="toggleMainMenu(false);homeAnchor('estudarMenu')"><span>🧠</span><div><b>Estudar</b><small>Fixação, erros, flashcards e estudo dirigido</small></div></button>
-      <button type="button" onclick="toggleMainMenu(false);homeAnchor('simuladoMenu')"><span>🎯</span><div><b>Simulado</b><small>40 questões aleatórias</small></div></button>
-      <a href="material-revisao.html" onclick="toggleMainMenu(false)"><span>📚</span><div><b>Material de Revisão</b><small>Questões por matéria e respostas corretas</small></div></a>
-      <button type="button" onclick="toggleMainMenu(false);homeAnchor('provasMenu')"><span>📄</span><div><b>Provas Originais</b><small>EAP 2023, 2024, 2025 e 2026</small></div></button>
-      <button type="button" onclick="toggleMainMenu(false);showStats()"><span>📊</span><div><b>Desempenho</b><small>Estatísticas e evolução dos estudos</small></div></button>
+      <div class="drawer-section-label">Simulados</div>
+      <button type="button" onclick="toggleMainMenu(false);startSimulation()"><span>🎯</span><div><b>Simulado — 40 questões</b><small>Sorteio entre as 153 questões válidas</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);startFullSimulation()"><span>📚</span><div><b>Simulado completo</b><small>Todas as 153 questões válidas</small></div></button>
+      <div class="drawer-year-grid"><button type="button" onclick="toggleMainMenu(false);startYearSimulation(2023)">2023</button><button type="button" onclick="toggleMainMenu(false);startYearSimulation(2024)">2024</button><button type="button" onclick="toggleMainMenu(false);startYearSimulation(2025)">2025</button><button type="button" onclick="toggleMainMenu(false);startYearSimulation(2026)">2026</button></div>
+      <div class="drawer-divider"></div>
+      <div class="drawer-section-label">Estudo e revisão</div>
+      <button type="button" onclick="toggleMainMenu(false);startAdaptive()"><span>🧠</span><div><b>Fixação inteligente</b><small>Prioriza erros e questões com menor domínio</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);startErrors()"><span>🔁</span><div><b>Caderno de erros</b><small>Refaça somente as questões já erradas</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);startFlashcards()"><span>⚡</span><div><b>Flashcards</b><small>Revisão rápida com resposta revelada depois</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);show('directedPage')"><span>📖</span><div><b>Estudo direcionado</b><small>Escolha ano e matéria</small></div></button>
+      <a href="material-revisao.html" onclick="toggleMainMenu(false)"><span>📘</span><div><b>Material de Revisão</b><small>Questões + somente respostas corretas</small></div></a>
+      <a href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download onclick="toggleMainMenu(false)"><span>⬇️</span><div><b>Baixar PDF completo</b><small>Material de revisão para guardar ou imprimir</small></div></a>
+      <div class="drawer-divider"></div>
+      <div class="drawer-section-label">Consulta e progresso</div>
+      <button type="button" onclick="toggleMainMenu(false);show('proofsPage')"><span>📄</span><div><b>Provas Originais</b><small>EAP 2023, 2024, 2025 e 2026 + busca</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);showStats()"><span>📊</span><div><b>Desempenho detalhado</b><small>Estatísticas e histórico de simulados</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);exportProgress()"><span>⬆️</span><div><b>Exportar progresso</b><small>Crie um backup deste aparelho</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);document.getElementById('progressImportGlobal').click()"><span>⬇️</span><div><b>Importar progresso</b><small>Restaure um backup salvo</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);openAbout()"><span>ℹ️</span><div><b>Sobre este material</b><small>Finalidade, atualização anual e aviso de conferência</small></div></button>
+      <input id="progressImportGlobal" type="file" accept="application/json,.json" hidden onchange="importProgressFile(event)">
     </nav>
   </aside>
 </div>
@@ -188,26 +237,39 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
     <span class="cycle-note">Atualização anual</span>
   </div>
 
-  <div class="panel progress-panel">
-    <div class="section-title">Visão geral</div>
-    <div class="stats">
-      <div class="stat"><b>160</b><span>questões no banco</span></div>
-      <div class="stat"><b>153</b><span>questões válidas</span></div>
-      <div class="stat"><b>7</b><span>questões anuladas</span></div>
-      <div class="stat"><b id="homePct">0%</b><span>acerto acumulado</span></div>
+  <div class="home-sim-stack">
+    <div class="panel primary-sim-card">
+      <div class="eyebrow-home">Ação principal</div>
+      <h2>🎯 Simulado — 40 questões</h2>
+      <p>Treine no formato principal: 40 questões sorteadas entre as provas mais recentes, sem revelar o gabarito durante a tentativa.</p>
+      <button class="primary" type="button" onclick="startSimulation()">Iniciar simulado de 40</button>
+    </div>
+
+    <div class="panel complete-sim-card">
+      <div><div class="eyebrow-home">Treino completo</div><h2>📚 Simulado completo — 153 questões</h2><p>Resolva todas as questões válidas de 2023 a 2026. O andamento é salvo automaticamente neste aparelho para continuar depois.</p></div>
+      <div class="complete-actions"><button class="secondary" id="resumeFullSimBtn" type="button" onclick="resumeFullSimulation()" hidden>Continuar</button><button class="primary" type="button" onclick="startFullSimulation()">Iniciar completo</button></div>
     </div>
   </div>
 
-  <div class="panel" id="estudarMenu">
-    <div class="section-title">Estudar</div>
-    <div class="grid">
-      <button class="action" onclick="startAdaptive()"><strong>🧠 Fixação inteligente</strong><small>Prioriza questões erradas e com menor domínio.</small></button>
-      <button class="action" onclick="startErrors()"><strong>🔁 Caderno de erros</strong><small>Refaça somente o que você já errou.</small></button>
-      <button class="action" onclick="startFlashcards()"><strong>⚡ Flashcards</strong><small>Pense na resposta e depois revele o gabarito.</small></button>
-      <button class="action" onclick="document.getElementById('directedBox').scrollIntoView({behavior:'smooth',block:'center'})"><strong>📖 Estudo direcionado</strong><small>Escolha o ano e a matéria que deseja estudar.</small></button>
-      <a class="action action-link" href="material-revisao.html"><strong>📚 Material de revisão</strong><small>Questões por matéria mostrando somente a resposta correta.</small></a>
+  <div class="panel home-progress-card">
+    <div class="section-title">Seu progresso</div>
+    <div class="home-metrics">
+      <div class="home-metric"><b id="homePct">0%</b><span>acertos</span></div>
+      <div class="home-metric"><b id="homeStudied">0/153</b><span>estudadas</span></div>
+      <div class="home-metric"><b id="homeReview">0</b><span>para revisar</span></div>
     </div>
-    <div id="directedBox" class="directed-box">
+  </div>
+
+  <div class="panel home-review-strip">
+    <div class="review-copy"><b>📘 Material de Revisão</b><span>Questões organizadas por matéria mostrando somente a resposta correta.</span></div>
+    <div class="home-review-actions"><a class="secondary link-btn" href="material-revisao.html">Ler online</a><a class="secondary link-btn" href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download>Baixar PDF</a></div>
+  </div>
+</section>
+
+<section id="directedPage" class="hidden directed-page">
+  <div class="panel">
+    <div class="page-title-row"><div><h2>📖 Estudo direcionado</h2><p>Escolha o ano e a matéria que deseja revisar.</p></div></div>
+    <div class="directed-box">
       <div class="filters">
         <div class="field"><label>Ano</label><select id="filterYear"><option value="all">Todos os anos</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option></select></div>
         <div class="field"><label>Área</label><select id="filterSubject"><option value="all">Todas as áreas</option><option>Legislação Institucional</option><option>Conhecimentos Jurídicos</option><option>Conhecimentos Profissionais</option></select></div>
@@ -216,20 +278,11 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
       <label class="checkline"><input id="includeAnnulled" type="checkbox"> incluir as 7 questões anuladas no estudo dirigido (sem pontuação)</label>
     </div>
   </div>
+</section>
 
-  <div class="panel sim-cta" id="simuladoMenu">
-    <div><div class="section-title">Simulado</div><h2>40 questões aleatórias</h2><p>Simulação sem feedback durante a prova, usando somente as 153 questões válidas.</p></div>
-    <button class="primary big-cta" onclick="startSimulation()">🎯 Iniciar simulado</button>
-  </div>
-
-  <div class="panel review-cta" id="revisaoMenu">
-    <div><div class="section-title">Material de Revisão</div><h2>Questões por matéria</h2><p>Consulte cada questão com somente a resposta correta, com busca e filtros por matéria e ano.</p></div>
-    <a class="primary link-btn big-cta" href="material-revisao.html">📚 Abrir revisão</a>
-  </div>
-
-  <div class="panel" id="provasMenu">
-    <div class="section-title">Provas Originais</div>
-    <p class="compact-p">Consulte os PDFs originais usados como base e pesquise palavras, assuntos ou expressões no conteúdo das questões.</p>
+<section id="proofsPage" class="hidden proofs-page">
+  <div class="panel">
+    <div class="page-title-row"><div><h2>📄 Provas Originais</h2><p>Consulte os PDFs originais e faça buscas no conteúdo indexado das questões.</p></div></div>
     <div class="proof-grid">
       <a class="proof-card" href="provas/EAP-2023.pdf" target="_blank" rel="noopener"><b>EAP 2023</b><span>Abrir prova original</span></a>
       <a class="proof-card" href="provas/EAP-2024.pdf" target="_blank" rel="noopener"><b>EAP 2024</b><span>Abrir prova original</span></a>
@@ -237,28 +290,11 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
       <a class="proof-card" href="provas/EAP-2026.pdf" target="_blank" rel="noopener"><b>EAP 2026</b><span>Abrir prova original</span></a>
     </div>
     <div class="proof-search">
-      <input id="proofSearch" type="search" placeholder="🔎 Buscar nas provas..." autocomplete="off">
+      <input id="proofSearch" type="search" placeholder="🔎 Buscar palavra, assunto ou expressão..." autocomplete="off">
       <select id="proofYear"><option value="all">Todos os anos</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option></select>
     </div>
     <div id="proofResults" class="proof-results"><div class="empty small-empty">Digite uma palavra ou expressão para pesquisar nas quatro provas.</div></div>
   </div>
-
-  <div class="panel" id="desempenhoMenu">
-    <div class="section-title">Meu desempenho</div>
-    <div id="progressSummary"></div>
-    <div class="controls performance-actions">
-      <button class="secondary" onclick="showStats()">📊 Ver estatísticas</button>
-      <div class="right">
-        <button class="secondary" onclick="exportProgress()">⬆ Exportar progresso</button>
-        <button class="secondary" onclick="document.getElementById('progressImport').click()">⬇ Importar progresso</button>
-        <input id="progressImport" type="file" accept="application/json,.json" hidden onchange="importProgressFile(event)">
-        <button class="danger" onclick="resetProgress()">Zerar progresso</button>
-      </div>
-    </div>
-    <p class="local-note">💾 Sem login: o progresso fica armazenado neste aparelho/navegador. Use Exportar para criar um backup antes de trocar de aparelho ou limpar os dados do navegador.</p>
-  </div>
-
-  <div class="panel notice"><b>Estratégia:</b> tente responder antes de olhar qualquer dica. A fixação melhora quando você recupera a resposta da memória. No modo inteligente, uma questão só entra como “dominada” após uma sequência de acertos.</div>
 </section>
 
 <section id="study" class="hidden">
@@ -284,7 +320,7 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
 
 <section id="simulation" class="hidden">
   <div class="panel">
-    <div class="simtop"><div><b>Simulado — 40 questões</b><div class="muted" id="simCount"></div></div><div class="timer" id="timer">00:00:00</div></div>
+    <div class="simtop"><div><b id="simTitle">Simulado</b><div class="sim-mode-badge" id="simModeBadge">40 questões</div><div class="muted" id="simCount"></div></div><div class="timer" id="timer">00:00:00</div></div>
     <div class="progress"><i id="simProgress"></i></div>
     <div class="qhead"><div class="chips" id="simChips"></div><button class="secondary" onclick="confirmExitSimulation()">Sair</button></div>
     <div class="stem" id="simStem"></div><div class="options" id="simOptions"></div>
@@ -317,7 +353,7 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
 <script>
 
 const EDP_BACK_GUARD='edp-back-guard-v1';
-function activeScreenId(){return ['home','study','flash','simulation','report','statsPage'].find(id=>!document.getElementById(id)?.classList.contains('hidden'))||'home'}
+function activeScreenId(){return ['home','directedPage','proofsPage','study','flash','simulation','report','statsPage'].find(id=>!document.getElementById(id)?.classList.contains('hidden'))||'home'}
 function ensureBackGuard(){try{if(!history.state?.[EDP_BACK_GUARD])history.pushState({...(history.state||{}),[EDP_BACK_GUARD]:true},'',location.href)}catch(e){}}
 function toggleMainMenu(open){const m=document.getElementById('menuOverlay');if(!m)return;const shouldOpen=open===undefined?!m.classList.contains('open'):!!open;if(shouldOpen)ensureBackGuard();m.classList.toggle('open',shouldOpen);document.body.classList.toggle('menu-open',shouldOpen);}
 function compactBack(){if(activeScreenId()==='simulation'){confirmExitSimulation();return;}goHome();}
@@ -332,7 +368,7 @@ function saveMeta(){localStorage.setItem(META_KEY,JSON.stringify(meta))}
 function homeAnchor(id){clearInterval(timerInt);show('home');setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}),40)}
 function normalizeSearch(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
 function searchOriginalProofs(){const input=document.getElementById('proofSearch');const out=document.getElementById('proofResults');const yf=document.getElementById('proofYear');if(!input||!out||!yf)return;const term=normalizeSearch(input.value.trim());const year=yf.value;if(term.length<2){out.innerHTML='<div class="empty small-empty">Digite ao menos 2 caracteres para pesquisar nas provas.</div>';return;}const hits=QUESTIONS.filter(q=>(year==='all'||String(q.year)===year)&&normalizeSearch([q.stem,...Object.values(q.options||{}),q.cue||'',q.subject].join(' ')).includes(term)).slice(0,40);out.innerHTML=hits.length?hits.map(q=>`<div class="proof-result"><div class="proof-result-head">${chip('EAP '+q.year)}${chip('Questão '+q.number)}${chip(q.subject)}</div><p>${escapeHtml(q.stem)}</p><a href="provas/EAP-${q.year}.pdf" target="_blank" rel="noopener">Abrir prova original ↗</a></div>`).join(''):'<div class="empty small-empty">Nenhum resultado encontrado.</div>';}
-function importProgressFile(ev){const file=ev.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!data||typeof data.progress!=='object'||Array.isArray(data.progress))throw new Error('Formato inválido');if(!confirm('Importar este backup e substituir o progresso atual neste aparelho?'))return;progress=data.progress||{};meta=data.meta&&typeof data.meta==='object'?data.meta:{simulations:[]};localStorage.setItem(KEY,JSON.stringify(progress));saveMeta();updateHome();alert('Progresso importado com sucesso.');}catch(e){alert('Não foi possível importar o arquivo. Verifique se ele é um backup válido do Preparatório EDP.');}finally{ev.target.value=''}};reader.readAsText(file)}
+function importProgressFile(ev){const file=ev.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!data||typeof data.progress!=='object'||Array.isArray(data.progress))throw new Error('Formato inválido');if(!confirm('Importar este backup e substituir o progresso atual neste aparelho?'))return;progress=data.progress||{};meta=data.meta&&typeof data.meta==='object'?data.meta:{simulations:[]};localStorage.setItem(KEY,JSON.stringify(progress));if(data.fullSimDraft)localStorage.setItem(FULL_SIM_DRAFT_KEY,JSON.stringify(data.fullSimDraft));else localStorage.removeItem(FULL_SIM_DRAFT_KEY);saveMeta();updateHome();alert('Progresso importado com sucesso.');}catch(e){alert('Não foi possível importar o arquivo. Verifique se ele é um backup válido do Preparatório EDP.');}finally{ev.target.value=''}};reader.readAsText(file)}
 let deferredInstallPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;const b=document.getElementById('installBtn');if(b)b.hidden=false});document.addEventListener('click',async e=>{if(e.target?.id==='installBtn'&&deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;e.target.hidden=true}});window.addEventListener('appinstalled',()=>{const b=document.getElementById('installBtn');if(b)b.hidden=true});if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 window.addEventListener('DOMContentLoaded',()=>{document.getElementById('proofSearch')?.addEventListener('input',searchOriginalProofs);document.getElementById('proofYear')?.addEventListener('change',searchOriginalProofs)});
 
@@ -342,16 +378,26 @@ const KEY='eap_sim_3_sargento_qpbm_v2';
 let progress=loadProgress();
 let studyPool=[],studyIndex=0,studyAnswered=false,studyMode='study';
 let flashPool=[],flashIndex=0;
-let simPool=[],simIndex=0,simAnswers={},timerStart=0,timerInt=null;
+let simPool=[],simIndex=0,simAnswers={},timerStart=0,timerInt=null,simElapsedBase=0,simMode='random40',simTitle='Simulado — 40 questões';
+const FULL_SIM_DRAFT_KEY='edp_full_sim_draft_v1';
 function loadProgress(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
 function saveProgress(){localStorage.setItem(KEY,JSON.stringify(progress));updateHome()}
 function st(id){if(!progress[id])progress[id]={attempts:0,correct:0,wrong:0,streak:0,hard:false};return progress[id]}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function show(id){['home','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');const menu=document.getElementById('menuOverlay');if(menu){menu.classList.remove('open');document.body.classList.remove('menu-open')}if(id!=='home')ensureBackGuard();window.scrollTo({top:0,behavior:'smooth'})}
+function show(id){['home','directedPage','proofsPage','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');const menu=document.getElementById('menuOverlay');if(menu){menu.classList.remove('open');document.body.classList.remove('menu-open')}if(id!=='home')ensureBackGuard();window.scrollTo({top:0,behavior:'smooth'})}
 function qlabel(q){return `EAP ${q.year} • Questão ${String(q.number).padStart(2,'0')}`}
 function chip(text,extra=''){return `<span class="chip ${extra}">${text}</span>`}
 function filtered(includeAnn=false){let y=document.getElementById('filterYear').value,s=document.getElementById('filterSubject').value;return QUESTIONS.filter(q=>(includeAnn||!q.annulled)&&(y==='all'||String(q.year)===y)&&(s==='all'||q.subject===s))}
-function updateHome(){let vals=Object.values(progress),att=vals.reduce((a,x)=>a+x.attempts,0),cor=vals.reduce((a,x)=>a+x.correct,0),wrong=vals.reduce((a,x)=>a+x.wrong,0),mastered=VALID.filter(q=>(progress[q.id]?.streak||0)>=3).length;document.getElementById('homePct').textContent=att?Math.round(cor/att*100)+'%':'0%';document.getElementById('progressSummary').innerHTML=`<div class="stats"><div class="stat"><b>${att}</b><span>respostas dadas</span></div><div class="stat"><b>${cor}</b><span>acertos</span></div><div class="stat"><b>${wrong}</b><span>erros</span></div><div class="stat"><b>${mastered}/153</b><span>dominadas (3 acertos seguidos)</span></div></div>`}
+function updateHome(){
+  let vals=Object.values(progress),att=vals.reduce((a,x)=>a+(x.attempts||0),0),cor=vals.reduce((a,x)=>a+(x.correct||0),0);
+  let studied=VALID.filter(q=>(progress[q.id]?.attempts||0)>0).length;
+  let review=VALID.filter(q=>(progress[q.id]?.wrong||0)>0&&(progress[q.id]?.streak||0)<3).length;
+  const pct=document.getElementById('homePct'), studiedEl=document.getElementById('homeStudied'), reviewEl=document.getElementById('homeReview');
+  if(pct)pct.textContent=att?Math.round(cor/att*100)+'%':'0%';
+  if(studiedEl)studiedEl.textContent=`${studied}/153`;
+  if(reviewEl)reviewEl.textContent=review;
+  const resume=document.getElementById('resumeFullSimBtn');if(resume)resume.hidden=!loadFullSimDraft();
+}
 function startDirected(){let pool=filtered(document.getElementById('includeAnnulled').checked);if(!pool.length)return alert('Nenhuma questão nesse filtro.');startStudy(shuffle(pool),'directed')}
 function startAdaptive(){let scored=VALID.map(q=>{let x=progress[q.id]||{};let weight=1+(x.wrong||0)*4+(x.hard?3:0)-Math.min((x.streak||0),3)*.7;return {q,weight:Math.max(.3,weight)}});let pool=[];while(pool.length<Math.min(80,VALID.length)){let total=scored.reduce((a,x)=>a+x.weight,0),r=Math.random()*total,pick=scored[0];for(let x of scored){r-=x.weight;if(r<=0){pick=x;break}}if(!pool.includes(pick.q))pool.push(pick.q)}startStudy(pool,'adaptive')}
 function startErrors(){let pool=VALID.filter(q=>(progress[q.id]?.wrong||0)>0).sort((a,b)=>(progress[b.id]?.wrong||0)-(progress[a.id]?.wrong||0));if(!pool.length)return alert('Seu caderno de erros ainda está vazio. Faça algumas questões primeiro.');startStudy(pool,'errors')}
@@ -365,22 +411,73 @@ function startFlashcards(){flashPool=shuffle(VALID);flashIndex=0;show('flash');r
 function renderFlash(){if(flashIndex>=flashPool.length){showReportSimple('Flashcards concluídos','Você passou por todas as questões válidas.');return}let q=flashPool[flashIndex];document.getElementById('flashChips').innerHTML=chip(qlabel(q))+chip(q.subject);document.getElementById('flashProgress').style.width=(flashIndex/flashPool.length*100)+'%';document.getElementById('flashStem').textContent=q.stem;document.getElementById('flashAnswer').classList.add('hidden');document.getElementById('flashAnswer').innerHTML='';document.getElementById('revealBtn').classList.remove('hidden');document.getElementById('flashRate').classList.add('hidden')}
 function revealFlash(){let q=flashPool[flashIndex];document.getElementById('flashAnswer').innerHTML=`<b>Resposta: ${q.answer}</b><div style="margin-top:7px">${escapeHtml(q.options[q.answer])}</div><div class="muted" style="margin-top:8px"><b>Gatilho:</b> ${escapeHtml(q.cue)}</div>`;document.getElementById('flashAnswer').classList.remove('hidden');document.getElementById('revealBtn').classList.add('hidden');document.getElementById('flashRate').classList.remove('hidden')}
 function rateFlash(ok){let q=flashPool[flashIndex],x=st(q.id);x.attempts++;if(ok){x.correct++;x.streak++}else{x.wrong++;x.streak=0}saveProgress();flashIndex++;renderFlash()}
-function startSimulation(){simPool=shuffle(VALID).slice(0,40);simIndex=0;simAnswers={};timerStart=Date.now();clearInterval(timerInt);timerInt=setInterval(updateTimer,1000);show('simulation');renderSim();updateTimer()}
-function updateTimer(){let s=Math.floor((Date.now()-timerStart)/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),x=s%60;document.getElementById('timer').textContent=[h,m,x].map(v=>String(v).padStart(2,'0')).join(':')}
-function renderSim(){let q=simPool[simIndex];document.getElementById('simCount').textContent=`Questão ${simIndex+1} de 40 • respondidas: ${Object.keys(simAnswers).length}`;document.getElementById('simProgress').style.width=((simIndex+1)/40*100)+'%';document.getElementById('simChips').innerHTML=chip(qlabel(q))+chip(q.subject);document.getElementById('simStem').textContent=q.stem;document.getElementById('simOptions').innerHTML='ABCD'.split('').map(L=>`<button class="opt ${simAnswers[q.id]===L?'selected':''}" onclick="selectSim('${L}')"><span class="letter">${L}</span><span>${escapeHtml(q.options[L])}</span></button>`).join('')}
-function selectSim(L){simAnswers[simPool[simIndex].id]=L;renderSim()}
-function nextSim(){if(simIndex<39){simIndex++;renderSim()}else finishSimulation()}
-function prevSim(){if(simIndex>0){simIndex--;renderSim()}}
-function finishSimulation(){let unanswered=40-Object.keys(simAnswers).length;if(unanswered&&!confirm(`Ainda há ${unanswered} questão(ões) sem resposta. Finalizar mesmo assim?`))return;clearInterval(timerInt);let correct=0,wrong=[];for(let q of simPool){let sel=simAnswers[q.id]||null,x=st(q.id);x.attempts++;if(sel===q.answer){correct++;x.correct++;x.streak++}else{x.wrong++;x.streak=0;wrong.push({q,sel})}}saveProgress();let elapsed=document.getElementById('timer').textContent;meta.simulations=Array.isArray(meta.simulations)?meta.simulations:[];meta.simulations.unshift({date:new Date().toISOString(),correct,total:40,pct:Math.round(correct/40*100),elapsed});meta.simulations=meta.simulations.slice(0,30);saveMeta();show('report');document.getElementById('reportBox').innerHTML=`<h2>Resultado do simulado</h2><div class="score">${correct}/40 — ${Math.round(correct/40*100)}%</div><p class="muted">Tempo: ${elapsed} • Erros/brancos: ${40-correct}</p><div class="controls"><button class="primary" onclick="retrySimErrors()">Refazer erros</button><div class="right"><button class="secondary" onclick="startSimulation()">Novo simulado</button><button class="secondary" onclick="goHome()">Início</button></div></div><h3>Revisão</h3>${wrong.length?wrong.map(r=>`<div class="review-item"><b>${qlabel(r.q)}</b> — sua resposta: ${r.sel||'em branco'}; correta: ${r.q.answer}.<div class="muted">${escapeHtml(r.q.cue)}</div></div>`).join(''):'<div class="feedback ok"><b>✓ Você acertou as 40 questões.</b></div>'}`;window._lastWrong=wrong.map(r=>r.q)}
+function getElapsedSeconds(){return simElapsedBase+Math.max(0,Math.floor((Date.now()-timerStart)/1000))}
+function formatElapsed(total){let h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':')}
+function loadFullSimDraft(){try{const d=JSON.parse(localStorage.getItem(FULL_SIM_DRAFT_KEY));if(!d||!Array.isArray(d.poolIds)||!d.poolIds.length)return null;return d}catch(e){return null}}
+function saveFullSimDraft(){if(simMode!=='complete'||!simPool.length)return;const draft={version:1,savedAt:new Date().toISOString(),poolIds:simPool.map(q=>q.id),index:simIndex,answers:simAnswers,elapsed:getElapsedSeconds()};localStorage.setItem(FULL_SIM_DRAFT_KEY,JSON.stringify(draft));updateHome()}
+function clearFullSimDraft(){localStorage.removeItem(FULL_SIM_DRAFT_KEY);updateHome()}
+function startSimWithPool(pool,mode,title){
+  if(!pool.length)return alert('Nenhuma questão disponível para este simulado.');
+  simPool=[...pool];simIndex=0;simAnswers={};simElapsedBase=0;simMode=mode;simTitle=title;timerStart=Date.now();clearInterval(timerInt);timerInt=setInterval(updateTimer,1000);show('simulation');renderSim();updateTimer();if(simMode==='complete')saveFullSimDraft();
+}
+function startSimulation(){startSimWithPool(shuffle(VALID).slice(0,40),'random40','Simulado — 40 questões')}
+function startFullSimulation(){
+  const existing=loadFullSimDraft();
+  if(existing&&!confirm('Há um Simulado Completo em andamento neste aparelho. Iniciar um novo apagará esse andamento. Deseja iniciar do zero?'))return;
+  clearFullSimDraft();
+  const pool=[...VALID].sort((a,b)=>a.year-b.year||a.number-b.number);
+  startSimWithPool(pool,'complete','Simulado completo — 153 questões');
+}
+function resumeFullSimulation(){
+  const d=loadFullSimDraft();if(!d)return alert('Não há Simulado Completo salvo para continuar.');
+  const map=new Map(QUESTIONS.map(q=>[q.id,q]));const pool=d.poolIds.map(id=>map.get(id)).filter(q=>q&&!q.annulled);
+  if(pool.length!==153){clearFullSimDraft();return alert('O banco de questões mudou e o andamento anterior não pode ser retomado. Inicie um novo Simulado Completo.');}
+  simPool=pool;simIndex=Math.max(0,Math.min(Number(d.index)||0,pool.length-1));simAnswers=d.answers&&typeof d.answers==='object'?d.answers:{};simElapsedBase=Math.max(0,Number(d.elapsed)||0);simMode='complete';simTitle='Simulado completo — 153 questões';timerStart=Date.now();clearInterval(timerInt);timerInt=setInterval(updateTimer,1000);show('simulation');renderSim();updateTimer();
+}
+function startYearSimulation(year){
+  const pool=VALID.filter(q=>q.year===Number(year)).sort((a,b)=>a.number-b.number);
+  startSimWithPool(pool,'year-'+year,`Simulado EAP ${year} — ${pool.length} questões válidas`);
+}
+function updateTimer(){document.getElementById('timer').textContent=formatElapsed(getElapsedSeconds())}
+function renderSim(){
+  let q=simPool[simIndex],total=simPool.length;
+  document.getElementById('simTitle').textContent=simTitle;
+  document.getElementById('simModeBadge').textContent=simMode==='complete'?'153 questões • andamento salvo':(simMode.startsWith('year-')?`${total} questões válidas`:'40 questões aleatórias');
+  document.getElementById('simCount').textContent=`Questão ${simIndex+1} de ${total} • respondidas: ${Object.keys(simAnswers).length}`;
+  document.getElementById('simProgress').style.width=((simIndex+1)/total*100)+'%';
+  document.getElementById('simChips').innerHTML=chip(qlabel(q))+chip(q.subject);
+  document.getElementById('simStem').textContent=q.stem;
+  document.getElementById('simOptions').innerHTML='ABCD'.split('').map(L=>`<button class="opt ${simAnswers[q.id]===L?'selected':''}" onclick="selectSim('${L}')"><span class="letter">${L}</span><span>${escapeHtml(q.options[L])}</span></button>`).join('');
+}
+function selectSim(L){simAnswers[simPool[simIndex].id]=L;if(simMode==='complete')saveFullSimDraft();renderSim()}
+function nextSim(){if(simIndex<simPool.length-1){simIndex++;if(simMode==='complete')saveFullSimDraft();renderSim()}else finishSimulation()}
+function prevSim(){if(simIndex>0){simIndex--;if(simMode==='complete')saveFullSimDraft();renderSim()}}
+function simBreakdownHtml(){
+  const groups=[['Legislação Institucional',simPool.filter(q=>q.subject==='Legislação Institucional')],['Conhecimentos Jurídicos',simPool.filter(q=>q.subject==='Conhecimentos Jurídicos')],['Conhecimentos Profissionais',simPool.filter(q=>q.subject==='Conhecimentos Profissionais')]].filter(([,arr])=>arr.length);
+  const rows=groups.map(([name,arr])=>{const c=arr.filter(q=>simAnswers[q.id]===q.answer).length;return `<div class="barrow"><span>${name.replace('Conhecimentos ','')}</span><div class="bar"><i style="width:${Math.round(c/arr.length*100)}%"></i></div><b>${c}/${arr.length}</b></div>`}).join('');
+  return rows?`<h3>Desempenho por matéria</h3>${rows}`:'';
+}
+function finishSimulation(){
+  const total=simPool.length,unanswered=total-Object.keys(simAnswers).length;
+  if(unanswered&&!confirm(`Ainda há ${unanswered} questão(ões) sem resposta. Finalizar mesmo assim?`))return;
+  clearInterval(timerInt);const elapsed=formatElapsed(getElapsedSeconds());let correct=0,wrong=[];
+  for(let q of simPool){let sel=simAnswers[q.id]||null,x=st(q.id);x.attempts++;if(sel===q.answer){correct++;x.correct++;x.streak++}else{x.wrong++;x.streak=0;wrong.push({q,sel})}}
+  saveProgress();meta.simulations=Array.isArray(meta.simulations)?meta.simulations:[];meta.simulations.unshift({date:new Date().toISOString(),correct,total,pct:Math.round(correct/total*100),elapsed,mode:simMode,title:simTitle});meta.simulations=meta.simulations.slice(0,50);saveMeta();if(simMode==='complete')clearFullSimDraft();
+  show('report');document.getElementById('reportBox').innerHTML=`<h2>${escapeHtml(simTitle)}</h2><div class="score">${correct}/${total} — ${Math.round(correct/total*100)}%</div><p class="muted">Tempo: ${elapsed} • Erros/brancos: ${total-correct}</p>${simBreakdownHtml()}<div class="controls"><button class="primary" onclick="retrySimErrors()">Refazer erros</button><div class="right"><button class="secondary" onclick="startSimulation()">Simulado de 40</button><button class="secondary" onclick="goHome()">Início</button></div></div><h3>Revisão</h3>${wrong.length?wrong.map(r=>`<div class="review-item"><b>${qlabel(r.q)}</b> — sua resposta: ${r.sel||'em branco'}; correta: ${r.q.answer}.<div class="muted">${escapeHtml(r.q.cue)}</div></div>`).join(''):'<div class="feedback ok"><b>✓ Você acertou todas as questões deste simulado.</b></div>'}`;window._lastWrong=wrong.map(r=>r.q);
+}
 function retrySimErrors(){let p=window._lastWrong||[];if(!p.length)return goHome();startStudy(p,'sim-errors')}
-function confirmExitSimulation(){if(confirm('Sair do simulado atual? As respostas desta tentativa não serão contabilizadas.')){clearInterval(timerInt);goHome()}}
+function confirmExitSimulation(){
+  const msg=simMode==='complete'?'Sair do Simulado Completo? Seu andamento ficará salvo neste aparelho para continuar depois.':'Sair do simulado atual? As respostas desta tentativa não serão contabilizadas.';
+  if(confirm(msg)){if(simMode==='complete')saveFullSimDraft();clearInterval(timerInt);goHome()}
+}
 function showReportSimple(title,text){show('report');document.getElementById('reportBox').innerHTML=`<h2>${title}</h2><p>${text}</p><div class="controls"><button class="primary" onclick="goHome()">Voltar ao início</button></div>`}
 function showStats(){show('statsPage');let groups=[['2023',VALID.filter(q=>q.year===2023)],['2024',VALID.filter(q=>q.year===2024)],['2025',VALID.filter(q=>q.year===2025)],['2026',VALID.filter(q=>q.year===2026)],['Legislação',VALID.filter(q=>q.subject==='Legislação Institucional')],['Jurídicos',VALID.filter(q=>q.subject==='Conhecimentos Jurídicos')],['Profissionais',VALID.filter(q=>q.subject==='Conhecimentos Profissionais')]];let rows=groups.map(([name,arr])=>{let a=0,c=0;arr.forEach(q=>{let x=progress[q.id];if(x){a+=x.attempts||0;c+=x.correct||0}});let pct=a?Math.round(c/a*100):0;return `<div class="barrow"><span>${name}</span><div class="bar"><i style="width:${pct}%"></i></div><b>${pct}%</b></div>`}).join('');let hardest=VALID.map(q=>({q,w:progress[q.id]?.wrong||0})).filter(x=>x.w).sort((a,b)=>b.w-a.w).slice(0,10);let sims=(meta.simulations||[]).slice(0,10);let simHtml=sims.length?sims.map(s=>`<div class="review-item"><b>${s.correct}/40 — ${s.pct}%</b><div class="muted">${new Date(s.date).toLocaleString('pt-BR')} • ${s.elapsed||'tempo não registrado'}</div></div>`).join(''):'<div class="empty">Nenhum simulado concluído ainda.</div>';document.getElementById('statsBox').innerHTML=`<h3>Taxa de acerto</h3>${rows}<h3 style="margin-top:20px">Histórico de simulados</h3>${simHtml}<h3 style="margin-top:20px">Mais erradas</h3>${hardest.length?hardest.map(x=>`<div class="review-item"><b>${qlabel(x.q)}</b> — ${x.w} erro(s)<div class="muted">${escapeHtml(x.q.cue)}</div></div>`).join(''):'<div class="empty">Nenhum erro registrado ainda.</div>'}`}
 function goHome(){clearInterval(timerInt);show('home');updateHome()}
-function exportProgress(){let blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),progress,meta},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso_edp_3_sargento_qpbm.json';a.click();URL.revokeObjectURL(a.href)}
-function resetProgress(){if(confirm('Zerar todo o histórico de acertos, erros, simulados e marcações deste aparelho?')){progress={};meta={simulations:[]};localStorage.setItem(KEY,JSON.stringify(progress));saveMeta();updateHome()}}
+function exportProgress(){let blob=new Blob([JSON.stringify({version:2,exportedAt:new Date().toISOString(),progress,meta,fullSimDraft:loadFullSimDraft()},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso_edp_3_sargento_qpbm.json';a.click();URL.revokeObjectURL(a.href)}
+function resetProgress(){if(confirm('Zerar todo o histórico de acertos, erros, simulados, andamento salvo e marcações deste aparelho?')){progress={};meta={simulations:[]};localStorage.setItem(KEY,JSON.stringify(progress));localStorage.removeItem(FULL_SIM_DRAFT_KEY);saveMeta();updateHome()}}
 function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-window.addEventListener('popstate',()=>{const menu=document.getElementById('menuOverlay');const about=document.getElementById('aboutOverlay');const active=activeScreenId();if(menu?.classList.contains('open')){menu.classList.remove('open');document.body.classList.remove('menu-open');if(active!=='home')ensureBackGuard();return}if(about?.classList.contains('open')){closeAbout();if(active!=='home')ensureBackGuard();return}if(active==='simulation'){if(!confirm('Sair do simulado atual? As respostas desta tentativa não serão contabilizadas.')){ensureBackGuard();return}clearInterval(timerInt);show('home');updateHome();return}if(active!=='home'){clearInterval(timerInt);show('home');updateHome();return}});
+window.addEventListener('popstate',()=>{const menu=document.getElementById('menuOverlay');const about=document.getElementById('aboutOverlay');const active=activeScreenId();if(menu?.classList.contains('open')){menu.classList.remove('open');document.body.classList.remove('menu-open');if(active!=='home')ensureBackGuard();return}if(about?.classList.contains('open')){closeAbout();if(active!=='home')ensureBackGuard();return}if(active==='simulation'){const msg=simMode==='complete'?'Sair do Simulado Completo? Seu andamento ficará salvo para continuar depois.':'Sair do simulado atual? As respostas desta tentativa não serão contabilizadas.';if(!confirm(msg)){ensureBackGuard();return}if(simMode==='complete')saveFullSimDraft();clearInterval(timerInt);show('home');updateHome();return}if(active!=='home'){clearInterval(timerInt);show('home');updateHome();return}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&activeScreenId()==='simulation'&&simMode==='complete')saveFullSimDraft()});
 document.addEventListener('keydown',e=>{if(document.getElementById('study').classList.contains('hidden')===false&&!studyAnswered&&'abcdABCD'.includes(e.key))answerStudy(e.key.toUpperCase());if(document.getElementById('simulation').classList.contains('hidden')===false&&'abcdABCD'.includes(e.key))selectSim(e.key.toUpperCase())});
 updateHome();
 </script>
