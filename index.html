@@ -168,9 +168,50 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
   .drawer-nav button,.drawer-nav a{padding:11px 12px}.drawer-nav small{font-size:.70rem}
 }
 
+
+/* V3.5 — Leitor de PDF interno */
+.pdf-reader-panel{padding:0;overflow:hidden}.pdf-reader-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}.pdf-reader-title{min-width:0}.pdf-reader-title b{display:block;font-size:1rem;color:#151a22}.pdf-reader-title span{display:block;font-size:.78rem;color:var(--muted);margin-top:2px}.pdf-reader-actions{display:flex;gap:8px;flex-wrap:wrap}.pdf-reader-actions a,.pdf-reader-actions button{text-decoration:none}.pdf-frame-wrap{height:72vh;min-height:520px;background:#e8edf3}.pdf-frame-wrap iframe{display:block;width:100%;height:100%;border:0;background:#fff}.pdf-reader-note{margin:12px 16px 16px}.home-review-actions{flex-wrap:wrap}.home-review-actions .link-btn{white-space:nowrap}
+@media(max-width:680px){.pdf-reader-toolbar{align-items:flex-start;flex-direction:column}.pdf-reader-actions{width:100%;display:grid;grid-template-columns:1fr 1fr}.pdf-reader-actions .primary,.pdf-reader-actions .secondary{width:100%;text-align:center}.pdf-frame-wrap{height:68vh;min-height:440px}.home-review-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.home-review-actions .link-btn:nth-child(1){grid-column:1/-1}.home-review-actions .link-btn{text-align:center}}
+
+
+/* V3.6 — Tela de abertura personalizada */
+.app-splash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:28px 22px;background:radial-gradient(circle at 50% 30%,#2a3039 0,#171b21 42%,#0d1014 100%);color:#fff;overflow:hidden;transition:opacity .45s ease,visibility .45s ease}
+.app-splash::before{content:"";position:absolute;inset:auto -22% -36% -22%;height:55%;background:radial-gradient(ellipse at center,rgba(255,107,0,.34),rgba(255,107,0,0) 67%);pointer-events:none}
+.app-splash.is-leaving{opacity:0;visibility:hidden}
+.splash-inner{position:relative;width:min(430px,100%);text-align:center;animation:splashEnter .8s cubic-bezier(.2,.75,.25,1) both}
+.splash-rank{width:122px;height:122px;margin:0 auto 24px;border-radius:28px;display:grid;place-items:center;background:#fff;padding:8px;box-shadow:0 22px 55px rgba(0,0,0,.38);animation:rankPulse 2.2s ease-in-out infinite}
+.splash-rank img{display:block;width:100%;height:100%;object-fit:contain;border-radius:21px}
+.splash-kicker{font-size:.75rem;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:#ff9b4a;margin-bottom:10px}
+.app-splash h1{margin:0;font-size:clamp(2rem,9vw,3.2rem);line-height:.98;letter-spacing:-.03em;color:#fff}
+.app-splash h2{margin:10px 0 0;font-size:clamp(1.05rem,5vw,1.45rem);letter-spacing:.075em;text-transform:uppercase;color:#ff9b4a}
+.splash-sub{margin:18px auto 0;max-width:330px;font-size:.94rem;line-height:1.48;color:#d7dde5}
+.splash-points{margin-top:22px;font-size:.75rem;font-weight:800;letter-spacing:.08em;color:#bfc8d3;text-transform:uppercase}
+.splash-loader{width:min(265px,78%);height:5px;margin:27px auto 0;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.splash-loader i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#ff6b00,#ffad69);animation:splashLoad 5s linear forwards}
+.splash-status{margin-top:9px;font-size:.7rem;letter-spacing:.06em;color:#8f9aa8}
+body.splash-lock{overflow:hidden}
+@keyframes splashEnter{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes rankPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes splashLoad{from{width:0}to{width:100%}}
+@media(max-width:480px){.app-splash{padding:24px 20px}.splash-rank{width:108px;height:108px;margin-bottom:21px}.splash-sub{font-size:.88rem}.splash-points{font-size:.68rem}}
+@media(prefers-reduced-motion:reduce){.splash-inner,.splash-rank{animation:none}.splash-loader i{animation:splashLoad 5s linear forwards}}
+
 </style>
 </head>
-<body>
+<body class="splash-lock">
+<div id="appSplash" class="app-splash" role="status" aria-label="Abrindo Preparatório EDP">
+  <div class="splash-inner">
+    <div class="splash-rank"><img src="assets/divisa-sargento.png" alt="Divisa de 3º Sargento QPBM"></div>
+    <div class="splash-kicker">Preparatório</div>
+    <h1>EDP</h1>
+    <h2>3º Sargento QPBM</h2>
+    <p class="splash-sub">Simulados, revisão e questões das provas do EAP</p>
+    <div class="splash-points">Preparação • Fixação • Desempenho</div>
+    <div class="splash-loader" aria-hidden="true"><i></i></div>
+    <div class="splash-status">Preparando seu ambiente de estudos…</div>
+  </div>
+</div>
+
 <div class="app">
 <header class="top">
   <div class="topin">
@@ -216,8 +257,9 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
       <button type="button" onclick="toggleMainMenu(false);startErrors()"><span>🔁</span><div><b>Caderno de erros</b><small>Refaça somente as questões já erradas</small></div></button>
       <button type="button" onclick="toggleMainMenu(false);startFlashcards()"><span>⚡</span><div><b>Flashcards</b><small>Revisão rápida com resposta revelada depois</small></div></button>
       <button type="button" onclick="toggleMainMenu(false);show('directedPage')"><span>📖</span><div><b>Estudo direcionado</b><small>Escolha ano e matéria</small></div></button>
-      <a href="material-revisao.html" onclick="toggleMainMenu(false)"><span>📘</span><div><b>Material de Revisão</b><small>Questões + somente respostas corretas</small></div></a>
-      <a href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download onclick="toggleMainMenu(false)"><span>⬇️</span><div><b>Baixar PDF completo</b><small>Material de revisão para guardar ou imprimir</small></div></a>
+      <a href="material-revisao.html" onclick="toggleMainMenu(false)"><span>📘</span><div><b>Material de Revisão — HTML</b><small>Questões + somente respostas corretas</small></div></a>
+      <button type="button" onclick="toggleMainMenu(false);openReviewPdf()"><span>📕</span><div><b>Visualizar PDF no app</b><small>Leia o material completo sem sair do Preparatório</small></div></button>
+      <a href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download onclick="toggleMainMenu(false)"><span>⬇️</span><div><b>Baixar PDF completo</b><small>Salve no aparelho para consultar ou imprimir</small></div></a>
       <div class="drawer-divider"></div>
       <div class="drawer-section-label">Consulta e progresso</div>
       <button type="button" onclick="toggleMainMenu(false);show('proofsPage')"><span>📄</span><div><b>Provas Originais</b><small>EAP 2023, 2024, 2025 e 2026 + busca</small></div></button>
@@ -262,7 +304,7 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
 
   <div class="panel home-review-strip">
     <div class="review-copy"><b>📘 Material de Revisão</b><span>Questões organizadas por matéria mostrando somente a resposta correta.</span></div>
-    <div class="home-review-actions"><a class="secondary link-btn" href="material-revisao.html">Ler online</a><a class="secondary link-btn" href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download>Baixar PDF</a></div>
+    <div class="home-review-actions"><a class="secondary link-btn" href="material-revisao.html">Ler em HTML</a><button class="secondary link-btn" type="button" onclick="openReviewPdf()">Visualizar PDF</button><a class="secondary link-btn" href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download>Baixar PDF</a></div>
   </div>
 </section>
 
@@ -294,6 +336,22 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
       <select id="proofYear"><option value="all">Todos os anos</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option></select>
     </div>
     <div id="proofResults" class="proof-results"><div class="empty small-empty">Digite uma palavra ou expressão para pesquisar nas quatro provas.</div></div>
+  </div>
+</section>
+
+<section id="pdfViewerPage" class="hidden pdf-viewer-page">
+  <div class="panel pdf-reader-panel">
+    <div class="pdf-reader-toolbar">
+      <div class="pdf-reader-title"><b>📕 Material de Revisão — PDF</b><span>Questões organizadas por matérias com somente as respostas corretas.</span></div>
+      <div class="pdf-reader-actions">
+        <a class="secondary" href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" target="_blank" rel="noopener">Abrir separado</a>
+        <a class="primary" href="downloads/material-revisao-edp-3-sargento-qpbm.pdf" download>⬇ Baixar PDF</a>
+      </div>
+    </div>
+    <div class="pdf-frame-wrap">
+      <iframe id="reviewPdfFrame" title="Material de Revisão em PDF" src="about:blank"></iframe>
+    </div>
+    <div class="notice pdf-reader-note"><b>Leitura dentro do app:</b> o PDF é carregado nesta tela. Em alguns aparelhos, o visualizador nativo pode apresentar opções próprias de zoom, páginas e compartilhamento.</div>
   </div>
 </section>
 
@@ -353,7 +411,7 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
 <script>
 
 const EDP_BACK_GUARD='edp-back-guard-v1';
-function activeScreenId(){return ['home','directedPage','proofsPage','study','flash','simulation','report','statsPage'].find(id=>!document.getElementById(id)?.classList.contains('hidden'))||'home'}
+function activeScreenId(){return ['home','directedPage','proofsPage','pdfViewerPage','study','flash','simulation','report','statsPage'].find(id=>!document.getElementById(id)?.classList.contains('hidden'))||'home'}
 function ensureBackGuard(){try{if(!history.state?.[EDP_BACK_GUARD])history.pushState({...(history.state||{}),[EDP_BACK_GUARD]:true},'',location.href)}catch(e){}}
 function toggleMainMenu(open){const m=document.getElementById('menuOverlay');if(!m)return;const shouldOpen=open===undefined?!m.classList.contains('open'):!!open;if(shouldOpen)ensureBackGuard();m.classList.toggle('open',shouldOpen);document.body.classList.toggle('menu-open',shouldOpen);}
 function compactBack(){if(activeScreenId()==='simulation'){confirmExitSimulation();return;}goHome();}
@@ -384,7 +442,7 @@ function loadProgress(){try{return JSON.parse(localStorage.getItem(KEY))||{}}cat
 function saveProgress(){localStorage.setItem(KEY,JSON.stringify(progress));updateHome()}
 function st(id){if(!progress[id])progress[id]={attempts:0,correct:0,wrong:0,streak:0,hard:false};return progress[id]}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function show(id){['home','directedPage','proofsPage','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');const menu=document.getElementById('menuOverlay');if(menu){menu.classList.remove('open');document.body.classList.remove('menu-open')}if(id!=='home')ensureBackGuard();window.scrollTo({top:0,behavior:'smooth'})}
+function show(id){['home','directedPage','proofsPage','pdfViewerPage','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');const menu=document.getElementById('menuOverlay');if(menu){menu.classList.remove('open');document.body.classList.remove('menu-open')}if(id!=='home')ensureBackGuard();window.scrollTo({top:0,behavior:'smooth'})}
 function qlabel(q){return `EAP ${q.year} • Questão ${String(q.number).padStart(2,'0')}`}
 function chip(text,extra=''){return `<span class="chip ${extra}">${text}</span>`}
 function filtered(includeAnn=false){let y=document.getElementById('filterYear').value,s=document.getElementById('filterSubject').value;return QUESTIONS.filter(q=>(includeAnn||!q.annulled)&&(y==='all'||String(q.year)===y)&&(s==='all'||q.subject===s))}
@@ -472,6 +530,11 @@ function confirmExitSimulation(){
 }
 function showReportSimple(title,text){show('report');document.getElementById('reportBox').innerHTML=`<h2>${title}</h2><p>${text}</p><div class="controls"><button class="primary" onclick="goHome()">Voltar ao início</button></div>`}
 function showStats(){show('statsPage');let groups=[['2023',VALID.filter(q=>q.year===2023)],['2024',VALID.filter(q=>q.year===2024)],['2025',VALID.filter(q=>q.year===2025)],['2026',VALID.filter(q=>q.year===2026)],['Legislação',VALID.filter(q=>q.subject==='Legislação Institucional')],['Jurídicos',VALID.filter(q=>q.subject==='Conhecimentos Jurídicos')],['Profissionais',VALID.filter(q=>q.subject==='Conhecimentos Profissionais')]];let rows=groups.map(([name,arr])=>{let a=0,c=0;arr.forEach(q=>{let x=progress[q.id];if(x){a+=x.attempts||0;c+=x.correct||0}});let pct=a?Math.round(c/a*100):0;return `<div class="barrow"><span>${name}</span><div class="bar"><i style="width:${pct}%"></i></div><b>${pct}%</b></div>`}).join('');let hardest=VALID.map(q=>({q,w:progress[q.id]?.wrong||0})).filter(x=>x.w).sort((a,b)=>b.w-a.w).slice(0,10);let sims=(meta.simulations||[]).slice(0,10);let simHtml=sims.length?sims.map(s=>`<div class="review-item"><b>${s.correct}/40 — ${s.pct}%</b><div class="muted">${new Date(s.date).toLocaleString('pt-BR')} • ${s.elapsed||'tempo não registrado'}</div></div>`).join(''):'<div class="empty">Nenhum simulado concluído ainda.</div>';document.getElementById('statsBox').innerHTML=`<h3>Taxa de acerto</h3>${rows}<h3 style="margin-top:20px">Histórico de simulados</h3>${simHtml}<h3 style="margin-top:20px">Mais erradas</h3>${hardest.length?hardest.map(x=>`<div class="review-item"><b>${qlabel(x.q)}</b> — ${x.w} erro(s)<div class="muted">${escapeHtml(x.q.cue)}</div></div>`).join(''):'<div class="empty">Nenhum erro registrado ainda.</div>'}`}
+function openReviewPdf(){
+  show('pdfViewerPage');
+  const f=document.getElementById('reviewPdfFrame');
+  if(f&&(!f.src||f.src==='about:blank'))f.src='downloads/material-revisao-edp-3-sargento-qpbm.pdf#view=FitH';
+}
 function goHome(){clearInterval(timerInt);show('home');updateHome()}
 function exportProgress(){let blob=new Blob([JSON.stringify({version:2,exportedAt:new Date().toISOString(),progress,meta,fullSimDraft:loadFullSimDraft()},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso_edp_3_sargento_qpbm.json';a.click();URL.revokeObjectURL(a.href)}
 function resetProgress(){if(confirm('Zerar todo o histórico de acertos, erros, simulados, andamento salvo e marcações deste aparelho?')){progress={};meta={simulations:[]};localStorage.setItem(KEY,JSON.stringify(progress));localStorage.removeItem(FULL_SIM_DRAFT_KEY);saveMeta();updateHome()}}
@@ -479,7 +542,26 @@ function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':
 window.addEventListener('popstate',()=>{const menu=document.getElementById('menuOverlay');const about=document.getElementById('aboutOverlay');const active=activeScreenId();if(menu?.classList.contains('open')){menu.classList.remove('open');document.body.classList.remove('menu-open');if(active!=='home')ensureBackGuard();return}if(about?.classList.contains('open')){closeAbout();if(active!=='home')ensureBackGuard();return}if(active==='simulation'){const msg=simMode==='complete'?'Sair do Simulado Completo? Seu andamento ficará salvo para continuar depois.':'Sair do simulado atual? As respostas desta tentativa não serão contabilizadas.';if(!confirm(msg)){ensureBackGuard();return}if(simMode==='complete')saveFullSimDraft();clearInterval(timerInt);show('home');updateHome();return}if(active!=='home'){clearInterval(timerInt);show('home');updateHome();return}});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&activeScreenId()==='simulation'&&simMode==='complete')saveFullSimDraft()});
 document.addEventListener('keydown',e=>{if(document.getElementById('study').classList.contains('hidden')===false&&!studyAnswered&&'abcdABCD'.includes(e.key))answerStudy(e.key.toUpperCase());if(document.getElementById('simulation').classList.contains('hidden')===false&&'abcdABCD'.includes(e.key))selectSim(e.key.toUpperCase())});
+
+(function initOpeningSplash(){
+  const splash=document.getElementById('appSplash');
+  if(!splash){document.body.classList.remove('splash-lock');return;}
+  const MIN_SPLASH_MS=5000;
+  const started=Date.now();
+  const finish=()=>{
+    const wait=Math.max(0,MIN_SPLASH_MS-(Date.now()-started));
+    setTimeout(()=>{
+      splash.classList.add('is-leaving');
+      document.body.classList.remove('splash-lock');
+      setTimeout(()=>splash.remove(),500);
+    },wait);
+  };
+  if(document.readyState==='complete') finish();
+  else window.addEventListener('load',finish,{once:true});
+})();
+
 updateHome();
+try{if(new URLSearchParams(location.search).get('view')==='pdf')openReviewPdf()}catch(e){}
 </script>
 </body>
 </html>
