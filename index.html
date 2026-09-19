@@ -316,9 +316,12 @@ body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:
 </div>
 <script>
 
-function toggleMainMenu(open){const m=document.getElementById('menuOverlay');if(!m)return;const shouldOpen=open===undefined?!m.classList.contains('open'):!!open;m.classList.toggle('open',shouldOpen);document.body.classList.toggle('menu-open',shouldOpen);}
-function compactBack(){if(!document.getElementById('simulation').classList.contains('hidden')){confirmExitSimulation();return;}goHome();}
-function openAbout(){const m=document.getElementById('aboutOverlay');if(!m)return;m.classList.add('open');document.body.classList.add('modal-open');}
+const EDP_BACK_GUARD='edp-back-guard-v1';
+function activeScreenId(){return ['home','study','flash','simulation','report','statsPage'].find(id=>!document.getElementById(id)?.classList.contains('hidden'))||'home'}
+function ensureBackGuard(){try{if(!history.state?.[EDP_BACK_GUARD])history.pushState({...(history.state||{}),[EDP_BACK_GUARD]:true},'',location.href)}catch(e){}}
+function toggleMainMenu(open){const m=document.getElementById('menuOverlay');if(!m)return;const shouldOpen=open===undefined?!m.classList.contains('open'):!!open;if(shouldOpen)ensureBackGuard();m.classList.toggle('open',shouldOpen);document.body.classList.toggle('menu-open',shouldOpen);}
+function compactBack(){if(activeScreenId()==='simulation'){confirmExitSimulation();return;}goHome();}
+function openAbout(){const m=document.getElementById('aboutOverlay');if(!m)return;ensureBackGuard();m.classList.add('open');document.body.classList.add('modal-open');}
 function closeAbout(){const m=document.getElementById('aboutOverlay');if(!m)return;m.classList.remove('open');document.body.classList.remove('modal-open');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('menuOverlay')?.classList.contains('open'))toggleMainMenu(false);else closeAbout();}});
 
@@ -344,7 +347,7 @@ function loadProgress(){try{return JSON.parse(localStorage.getItem(KEY))||{}}cat
 function saveProgress(){localStorage.setItem(KEY,JSON.stringify(progress));updateHome()}
 function st(id){if(!progress[id])progress[id]={attempts:0,correct:0,wrong:0,streak:0,hard:false};return progress[id]}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function show(id){['home','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');toggleMainMenu(false);window.scrollTo({top:0,behavior:'smooth'})}
+function show(id){['home','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');const menu=document.getElementById('menuOverlay');if(menu){menu.classList.remove('open');document.body.classList.remove('menu-open')}if(id!=='home')ensureBackGuard();window.scrollTo({top:0,behavior:'smooth'})}
 function qlabel(q){return `EAP ${q.year} • Questão ${String(q.number).padStart(2,'0')}`}
 function chip(text,extra=''){return `<span class="chip ${extra}">${text}</span>`}
 function filtered(includeAnn=false){let y=document.getElementById('filterYear').value,s=document.getElementById('filterSubject').value;return QUESTIONS.filter(q=>(includeAnn||!q.annulled)&&(y==='all'||String(q.year)===y)&&(s==='all'||q.subject===s))}
@@ -377,6 +380,7 @@ function goHome(){clearInterval(timerInt);show('home');updateHome()}
 function exportProgress(){let blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),progress,meta},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso_edp_3_sargento_qpbm.json';a.click();URL.revokeObjectURL(a.href)}
 function resetProgress(){if(confirm('Zerar todo o histórico de acertos, erros, simulados e marcações deste aparelho?')){progress={};meta={simulations:[]};localStorage.setItem(KEY,JSON.stringify(progress));saveMeta();updateHome()}}
 function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+window.addEventListener('popstate',()=>{const menu=document.getElementById('menuOverlay');const about=document.getElementById('aboutOverlay');const active=activeScreenId();if(menu?.classList.contains('open')){menu.classList.remove('open');document.body.classList.remove('menu-open');if(active!=='home')ensureBackGuard();return}if(about?.classList.contains('open')){closeAbout();if(active!=='home')ensureBackGuard();return}if(active==='simulation'){if(!confirm('Sair do simulado atual? As respostas desta tentativa não serão contabilizadas.')){ensureBackGuard();return}clearInterval(timerInt);show('home');updateHome();return}if(active!=='home'){clearInterval(timerInt);show('home');updateHome();return}});
 document.addEventListener('keydown',e=>{if(document.getElementById('study').classList.contains('hidden')===false&&!studyAnswered&&'abcdABCD'.includes(e.key))answerStudy(e.key.toUpperCase());if(document.getElementById('simulation').classList.contains('hidden')===false&&'abcdABCD'.includes(e.key))selectSim(e.key.toUpperCase())});
 updateHome();
 </script>
