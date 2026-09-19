@@ -114,12 +114,32 @@ body{padding-bottom:72px}
   .app-nav button,.app-nav a{font-size:.64rem!important}
 }
 
+
+
+/* V3.2 — menu superior, cabeçalho interno compacto e rodapé reduzido */
+body{padding-bottom:0!important}
+.app-nav{display:none!important}
+.menu-trigger{border:1px solid rgba(255,255,255,.20);background:rgba(18,22,28,.36);color:#fff;width:44px;height:44px;border-radius:14px;font-size:1.45rem;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.hero-menu-trigger{position:absolute;right:0;top:0;z-index:20}
+.compact-topbar{display:none;position:sticky;top:0;z-index:150;align-items:center;gap:9px;padding:8px 10px;background:rgba(18,22,28,.97);color:#fff;border-bottom:1px solid rgba(255,255,255,.10);box-shadow:0 6px 18px rgba(0,0,0,.18);backdrop-filter:blur(14px)}
+.compact-topbar img{width:38px;height:38px;border-radius:11px;object-fit:cover;background:#242a32;border:1px solid rgba(255,255,255,.14)}
+.compact-back{width:38px;height:38px;border:0;border-radius:11px;background:rgba(255,255,255,.10);color:#fff;font-size:1.35rem;cursor:pointer}
+.compact-title{min-width:0;flex:1;line-height:1.08}.compact-title b{display:block;font-size:.84rem;letter-spacing:.04em}.compact-title span{display:block;margin-top:3px;color:#ffc897;font-size:.72rem;font-weight:700}.compact-menu-trigger{width:38px;height:38px;border-radius:11px;font-size:1.2rem;background:rgba(255,255,255,.10)}
+body.internal-mode .top{display:none}body.internal-mode .compact-topbar{display:flex}body.internal-mode .wrap{margin:0 auto;padding-top:10px}
+.menu-overlay{position:fixed;inset:0;z-index:10000;background:rgba(4,7,11,.62);display:none;justify-content:flex-end;backdrop-filter:blur(3px)}.menu-overlay.open{display:flex}
+.menu-drawer{height:100%;width:min(360px,88vw);background:#f8f5f0;box-shadow:-24px 0 60px rgba(0,0,0,.28);overflow:auto;animation:drawerIn .18s ease-out}.menu-drawer-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px;background:linear-gradient(135deg,#171c23,#272d36);color:#fff}.menu-brand{display:flex;align-items:center;gap:10px}.menu-brand img{width:48px;height:48px;border-radius:14px;object-fit:cover;border:1px solid rgba(255,255,255,.16)}.menu-brand b{display:block;font-size:.95rem}.menu-brand span{display:block;color:#ffc795;font-size:.76rem;margin-top:2px}.menu-close{width:40px;height:40px;border:0;border-radius:12px;background:rgba(255,255,255,.10);color:#fff;font-size:1.5rem;cursor:pointer}.drawer-nav{padding:10px}.drawer-nav button,.drawer-nav a{width:100%;border:0;background:transparent;text-decoration:none;color:#202733;display:flex;align-items:center;gap:12px;text-align:left;padding:13px 12px;border-radius:14px;cursor:pointer}.drawer-nav button:hover,.drawer-nav a:hover{background:#fff0e4}.drawer-nav>*>span{font-size:1.35rem;flex:0 0 30px;text-align:center}.drawer-nav b{display:block;font-size:.94rem}.drawer-nav small{display:block;margin-top:2px;color:#727b87;font-size:.74rem;line-height:1.25}
+@keyframes drawerIn{from{transform:translateX(24px);opacity:.5}to{transform:translateX(0);opacity:1}}
+.site-footer{margin:12px auto 0!important;padding:14px 14px 15px!important;border-radius:16px 16px 0 0!important;background:linear-gradient(135deg,#161b22,#232a33)!important}.site-footer blockquote{max-width:820px;margin:0 auto 7px!important;font-size:.82rem!important;font-weight:600!important;line-height:1.35!important}.footer-signature{display:flex;justify-content:center;align-items:center;gap:7px;flex-wrap:wrap;font-size:.75rem;color:#cbd3dc}.footer-signature span:first-child{color:#ff9b4f;font-weight:900}.footer-signature i{color:#697482;font-style:normal}
+@media(max-width:760px){.hero-menu-trigger{right:2px;top:0}.brandcopy{padding-right:42px;max-width:82%!important}.site-footer{margin-top:10px!important;padding:12px 12px 13px!important}.site-footer blockquote{font-size:.76rem!important;line-height:1.32!important}.footer-signature{font-size:.70rem}.wrap{padding-bottom:16px!important}}
+@media(max-width:430px){.hero-menu-trigger{width:40px;height:40px;border-radius:12px;font-size:1.25rem}.compact-topbar{padding:7px 8px}.compact-title b{font-size:.80rem}.compact-title span{font-size:.68rem}.menu-drawer{width:90vw}}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
   <div class="topin">
+    <button class="menu-trigger hero-menu-trigger" type="button" aria-label="Abrir menu" onclick="toggleMainMenu(true)">☰</button>
     <div class="brandrow compact-hero">
       <div class="brandcopy">
         <div class="badge-wrap">
@@ -138,13 +158,28 @@ body{padding-bottom:72px}
     </div>
   </div>
 </header>
-<nav class="app-nav" aria-label="Menu principal">
-  <button type="button" onclick="openAbout()"><span>ℹ️</span>Sobre</button>
-  <button type="button" onclick="homeAnchor('estudarMenu')"><span>🧠</span>Estudar</button>
-  <button type="button" onclick="homeAnchor('simuladoMenu')"><span>🎯</span>Simulado</button>
-  <button type="button" onclick="homeAnchor('provasMenu')"><span>📄</span>Provas</button>
-  <button type="button" onclick="homeAnchor('desempenhoMenu')"><span>📊</span>Desempenho</button>
-</nav>
+<div id="compactTopbar" class="compact-topbar" aria-label="Barra de navegação interna">
+  <button class="compact-back" type="button" aria-label="Voltar ao início" onclick="compactBack()">←</button>
+  <img src="assets/divisa-sargento.png" alt="Divisa de 3º Sargento QPBM">
+  <div class="compact-title"><b>Preparatório EDP</b><span>3º Sargento QPBM</span></div>
+  <button class="menu-trigger compact-menu-trigger" type="button" aria-label="Abrir menu" onclick="toggleMainMenu(true)">☰</button>
+</div>
+<div id="menuOverlay" class="menu-overlay" onclick="if(event.target===this)toggleMainMenu(false)">
+  <aside class="menu-drawer" role="dialog" aria-modal="true" aria-label="Menu principal">
+    <div class="menu-drawer-head">
+      <div class="menu-brand"><img src="assets/divisa-sargento.png" alt=""><div><b>Preparatório EDP</b><span>3º Sargento QPBM</span></div></div>
+      <button type="button" class="menu-close" aria-label="Fechar menu" onclick="toggleMainMenu(false)">×</button>
+    </div>
+    <nav class="drawer-nav">
+      <button type="button" onclick="toggleMainMenu(false);openAbout()"><span>ℹ️</span><div><b>Sobre</b><small>Finalidade e informações do material</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);homeAnchor('estudarMenu')"><span>🧠</span><div><b>Estudar</b><small>Fixação, erros, flashcards e estudo dirigido</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);homeAnchor('simuladoMenu')"><span>🎯</span><div><b>Simulado</b><small>40 questões aleatórias</small></div></button>
+      <a href="material-revisao.html" onclick="toggleMainMenu(false)"><span>📚</span><div><b>Material de Revisão</b><small>Questões por matéria e respostas corretas</small></div></a>
+      <button type="button" onclick="toggleMainMenu(false);homeAnchor('provasMenu')"><span>📄</span><div><b>Provas Originais</b><small>EAP 2023, 2024, 2025 e 2026</small></div></button>
+      <button type="button" onclick="toggleMainMenu(false);showStats()"><span>📊</span><div><b>Desempenho</b><small>Estatísticas e evolução dos estudos</small></div></button>
+    </nav>
+  </aside>
+</div>
 <main class="wrap">
 <section id="home">
   <div class="cycle-strip" role="note" aria-label="Ciclo atual das provas">
@@ -228,7 +263,7 @@ body{padding-bottom:72px}
 
 <section id="study" class="hidden">
   <div class="panel">
-    <div class="qhead"><div class="chips" id="studyChips"></div><button class="secondary" onclick="goHome()">Início</button></div>
+    <div class="qhead"><div class="chips" id="studyChips"></div></div>
     <div class="progress"><i id="studyProgress"></i></div>
     <div class="stem" id="studyStem"></div>
     <div class="options" id="studyOptions"></div>
@@ -239,7 +274,7 @@ body{padding-bottom:72px}
 
 <section id="flash" class="hidden">
   <div class="panel">
-    <div class="qhead"><div class="chips" id="flashChips"></div><button class="secondary" onclick="goHome()">Início</button></div>
+    <div class="qhead"><div class="chips" id="flashChips"></div></div>
     <div class="progress"><i id="flashProgress"></i></div>
     <div class="stem" id="flashStem"></div>
     <div id="flashAnswer" class="flash-answer hidden"></div>
@@ -258,7 +293,7 @@ body{padding-bottom:72px}
 </section>
 
 <section id="report" class="hidden"><div class="panel report" id="reportBox"></div></section>
-<section id="statsPage" class="hidden"><div class="panel"><div class="qhead"><h2 style="margin:0">Estatísticas</h2><button class="secondary" onclick="goHome()">Início</button></div><div id="statsBox"></div></div></section>
+<section id="statsPage" class="hidden"><div class="panel"><div class="qhead"><h2 style="margin:0">Estatísticas</h2></div><div id="statsBox"></div></div></section>
 
 <div id="aboutOverlay" class="about-overlay" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" onclick="if(event.target===this)closeAbout()">
   <div class="about-modal">
@@ -275,17 +310,17 @@ body{padding-bottom:72px}
 </div>
 <footer class="site-footer">
   <blockquote>“Mais poder tem o sábio do que o forte, e o homem de conhecimento, mais do que o robusto.”</blockquote>
-  <div class="footer-ref">Provérbios 24:5</div>
-  <div class="footer-name">Elias Galliano</div>
-  <div class="footer-meta">Preparatório EDP — 3º Sargento QPBM · questões baseadas nas provas do EAP.</div>
+  <div class="footer-signature"><span>Provérbios 24:5</span><i>•</i><span>Elias Galliano</span></div>
 </footer>
 </main>
 </div>
 <script>
 
+function toggleMainMenu(open){const m=document.getElementById('menuOverlay');if(!m)return;const shouldOpen=open===undefined?!m.classList.contains('open'):!!open;m.classList.toggle('open',shouldOpen);document.body.classList.toggle('menu-open',shouldOpen);}
+function compactBack(){if(!document.getElementById('simulation').classList.contains('hidden')){confirmExitSimulation();return;}goHome();}
 function openAbout(){const m=document.getElementById('aboutOverlay');if(!m)return;m.classList.add('open');document.body.classList.add('modal-open');}
 function closeAbout(){const m=document.getElementById('aboutOverlay');if(!m)return;m.classList.remove('open');document.body.classList.remove('modal-open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAbout();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('menuOverlay')?.classList.contains('open'))toggleMainMenu(false);else closeAbout();}});
 
 const META_KEY='edp_3_sargento_meta_v1';
 let meta=loadMeta();
@@ -309,7 +344,7 @@ function loadProgress(){try{return JSON.parse(localStorage.getItem(KEY))||{}}cat
 function saveProgress(){localStorage.setItem(KEY,JSON.stringify(progress));updateHome()}
 function st(id){if(!progress[id])progress[id]={attempts:0,correct:0,wrong:0,streak:0,hard:false};return progress[id]}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function show(id){['home','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));window.scrollTo({top:0,behavior:'smooth'})}
+function show(id){['home','study','flash','simulation','report','statsPage'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.body.classList.toggle('internal-mode',id!=='home');toggleMainMenu(false);window.scrollTo({top:0,behavior:'smooth'})}
 function qlabel(q){return `EAP ${q.year} • Questão ${String(q.number).padStart(2,'0')}`}
 function chip(text,extra=''){return `<span class="chip ${extra}">${text}</span>`}
 function filtered(includeAnn=false){let y=document.getElementById('filterYear').value,s=document.getElementById('filterSubject').value;return QUESTIONS.filter(q=>(includeAnn||!q.annulled)&&(y==='all'||String(q.year)===y)&&(s==='all'||q.subject===s))}
