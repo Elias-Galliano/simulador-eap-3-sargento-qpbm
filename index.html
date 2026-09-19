@@ -67,6 +67,53 @@ body.modal-open{overflow:hidden}
 @media(max-width:760px){.top{padding:16px 12px 8px}.compact-hero{min-height:330px;display:block;position:relative}.brandcopy{position:relative;z-index:4;max-width:75%}.badge{width:54px;height:54px}.top h1{font-size:1.58rem}.hero-copy{font-size:.92rem!important;line-height:1.42}.chipline{gap:6px}.chipline span{font-size:.72rem;padding:6px 8px}.hero-figure.bare{position:absolute;right:-10px;bottom:0;width:48%;height:245px;min-height:0}.hero-figure.bare img{right:-4px;bottom:-8px;width:100%;max-height:260px}.hero-figure.bare:after{bottom:0}.wrap{margin:-2px auto 0}.app-nav{justify-content:flex-start}.update-card,.sim-cta,.review-cta{display:block}.update-card>button,.sim-cta .big-cta,.review-cta .big-cta{width:100%;margin-top:12px}.proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-search{grid-template-columns:1fr}.performance-actions .right{grid-template-columns:1fr!important}.site-footer{padding-bottom:95px}.brandcopy .badge-wrap{align-items:flex-start}.source-line{font-size:.76rem}}
 @media(max-width:430px){.compact-hero{min-height:355px}.brandcopy{max-width:78%}.hero-figure.bare{width:50%;height:230px}.hero-figure.bare img{max-height:235px}.proof-grid{grid-template-columns:1fr 1fr}.app-nav button,.app-nav a{min-width:60px;padding:7px 8px}.update-card{padding:14px}.site-footer blockquote{font-size:.94rem}}
 
+
+/* Refinamento mobile V3.1 — cabeçalho compacto e navegação inferior */
+.action-link{text-decoration:none;color:inherit;display:block}
+.cycle-strip{max-width:1080px;margin:0 auto 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;border-radius:15px;background:rgba(255,255,255,.92);border:1px solid #eddccf;box-shadow:0 10px 24px rgba(15,18,23,.07);font-size:.86rem;color:#3f4752}
+.cycle-dot{color:var(--brand);font-size:.72rem}.cycle-note{margin-left:auto;color:#8c4c14;font-weight:800;font-size:.76rem;background:#fff1e4;border:1px solid #f0d1b5;padding:4px 8px;border-radius:999px}
+.progress-panel .section-title{margin-bottom:10px}
+.app-nav{position:fixed!important;left:0;right:0;bottom:0;top:auto!important;z-index:120;display:grid!important;grid-template-columns:repeat(5,1fr);gap:2px;overflow:visible!important;padding:7px max(6px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-right));background:rgba(18,22,28,.97);border-top:1px solid rgba(255,255,255,.10);border-bottom:0;box-shadow:0 -8px 24px rgba(0,0,0,.18);backdrop-filter:blur(14px)}
+.app-nav button,.app-nav a{min-width:0!important;width:100%;padding:5px 2px!important;font-size:.68rem!important;line-height:1.1;border-radius:10px;gap:3px!important;white-space:nowrap}
+.app-nav button span,.app-nav a span{font-size:1.08rem!important}
+body{padding-bottom:72px}
+.site-footer{padding-bottom:38px!important;margin-bottom:0}
+@media(max-width:760px){
+  .top{padding:14px 12px 10px!important}
+  .compact-hero{min-height:282px!important;display:block;position:relative}
+  .brandcopy{max-width:78%!important}
+  .badge-wrap{gap:10px!important;margin-bottom:7px!important}
+  .badge{width:50px!important;height:50px!important;border-radius:15px!important}
+  .kicker-edp{font-size:.7rem!important;letter-spacing:.12em!important}
+  .top h1{font-size:1.48rem!important;margin-bottom:4px!important}
+  .source-line{font-size:.72rem!important;margin-top:2px!important}
+  .hero-copy{font-size:.84rem!important;line-height:1.36!important;max-width:95%!important;margin-top:9px!important}
+  .chipline{gap:5px!important;margin-top:9px!important;max-width:82%}
+  .chipline span{font-size:.65rem!important;padding:5px 7px!important}
+  .hero-figure.bare{right:-7px!important;bottom:0!important;width:42%!important;height:190px!important}
+  .hero-figure.bare img{right:0!important;bottom:-3px!important;width:100%!important;max-height:195px!important}
+  .hero-figure.bare:after{bottom:1px!important;height:17px!important}
+  .wrap{margin:-8px auto 0!important;padding-bottom:22px!important}
+  .cycle-strip{margin:0 4px 10px;padding:9px 11px;border-radius:13px;font-size:.76rem;gap:5px}
+  .cycle-note{font-size:.68rem;padding:3px 7px}
+  .panel{margin-bottom:11px!important}
+  .progress-panel{padding-top:13px!important}
+}
+@media(max-width:430px){
+  .compact-hero{min-height:270px!important}
+  .brandcopy{max-width:80%!important}
+  .hero-copy{max-width:92%!important}
+  .hero-figure.bare{width:40%!important;height:176px!important}
+  .hero-figure.bare img{max-height:182px!important}
+  .chipline{max-width:86%}
+  .cycle-strip{justify-content:flex-start}
+  .cycle-note{margin-left:0}
+  .stats{gap:8px!important}
+  .stat{padding:11px!important}
+  .stat b{font-size:1.32rem!important}
+  .app-nav button,.app-nav a{font-size:.64rem!important}
+}
+
 </style>
 </head>
 <body>
@@ -83,8 +130,8 @@ body.modal-open{overflow:hidden}
             <div class="source-line">Banco baseado nas provas do EAP</div>
           </div>
         </div>
-        <p class="hero-copy">Estude, revise seus erros e simule o exame com as quatro provas mais recentes usadas na preparação.</p>
-        <div class="chipline"><span>📚 EAP 2023–2026</span><span>🎯 153 questões válidas</span><span>💾 Progresso salvo no aparelho</span></div>
+        <p class="hero-copy">Estude com as quatro provas mais recentes do EAP e acompanhe sua evolução.</p>
+        <div class="chipline"><span>📚 2023–2026</span><span>🎯 153 válidas</span><span>💾 Progresso salvo</span></div>
         <button id="installBtn" class="install-btn" type="button" hidden>⬇ Instalar app</button>
       </div>
       <div class="hero-figure bare"><img src="assets/bombeiro.png" alt="Bombeiro Militar em uniforme laranja"></div>
@@ -95,22 +142,19 @@ body.modal-open{overflow:hidden}
   <button type="button" onclick="openAbout()"><span>ℹ️</span>Sobre</button>
   <button type="button" onclick="homeAnchor('estudarMenu')"><span>🧠</span>Estudar</button>
   <button type="button" onclick="homeAnchor('simuladoMenu')"><span>🎯</span>Simulado</button>
-  <a href="material-revisao.html"><span>📚</span>Revisão</a>
   <button type="button" onclick="homeAnchor('provasMenu')"><span>📄</span>Provas</button>
   <button type="button" onclick="homeAnchor('desempenhoMenu')"><span>📊</span>Desempenho</button>
 </nav>
 <main class="wrap">
 <section id="home">
-  <div class="panel update-card">
-    <div>
-      <div class="section-title">Banco de questões atualizado anualmente</div>
-      <p class="compact-p">Este preparatório utiliza as quatro provas mais recentes do EAP para 3º Sargento QPBM. <b>Ciclo atual: 2023, 2024, 2025 e 2026.</b></p>
-      <p class="compact-p muted">A cada novo ciclo, a prova mais antiga é retirada e a mais recente é adicionada ao material.</p>
-    </div>
-    <button class="secondary" type="button" onclick="openAbout()">Sobre o material</button>
+  <div class="cycle-strip" role="note" aria-label="Ciclo atual das provas">
+    <span class="cycle-dot">●</span>
+    <span><b>Ciclo atual:</b> 2023 • 2024 • 2025 • 2026</span>
+    <span class="cycle-note">Atualização anual</span>
   </div>
 
-  <div class="panel">
+  <div class="panel progress-panel">
+    <div class="section-title">Visão geral</div>
     <div class="stats">
       <div class="stat"><b>160</b><span>questões no banco</span></div>
       <div class="stat"><b>153</b><span>questões válidas</span></div>
@@ -126,6 +170,7 @@ body.modal-open{overflow:hidden}
       <button class="action" onclick="startErrors()"><strong>🔁 Caderno de erros</strong><small>Refaça somente o que você já errou.</small></button>
       <button class="action" onclick="startFlashcards()"><strong>⚡ Flashcards</strong><small>Pense na resposta e depois revele o gabarito.</small></button>
       <button class="action" onclick="document.getElementById('directedBox').scrollIntoView({behavior:'smooth',block:'center'})"><strong>📖 Estudo direcionado</strong><small>Escolha o ano e a matéria que deseja estudar.</small></button>
+      <a class="action action-link" href="material-revisao.html"><strong>📚 Material de revisão</strong><small>Questões por matéria mostrando somente a resposta correta.</small></a>
     </div>
     <div id="directedBox" class="directed-box">
       <div class="filters">
